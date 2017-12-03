@@ -10,6 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.17.1",
+    "cheerio": "^1.0.0-rc.2",
     "osmosis": "^1.1.4"
+  },
+  "devDependencies": {
+    "ramda": "^0.25.0"
   }
 }
