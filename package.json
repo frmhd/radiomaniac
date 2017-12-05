@@ -5,16 +5,27 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "node app/index.js",
+    "serverDev": "nodemon server/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.17.1",
-    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.2",
+    "mongodb": "^2.2.33",
+    "body-parser": "^1.18.2",
     "osmosis": "^1.1.4"
   },
   "devDependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "eslint": "^4.12.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "nodemon": "^1.12.1",
     "ramda": "^0.25.0"
   }
 }
