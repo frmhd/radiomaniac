@@ -15,7 +15,10 @@ const formatYesterday = () => {
   return `${getYear}-${formatDate(getMonth)}-${formatDate(getDay)}`
 }
 
-const getUrl = () => `http://www.europaplus.ru/index.php?go=Playlist&date=${formatYesterday()}&time_start=00.00&time_stop=23.59&channel=europa&__ajax__=1&list_only=1`
+const yesterdayDate = formatYesterday()
+module.exports = formatYesterday
+
+const getUrl = () => `http://www.europaplus.ru/index.php?go=Playlist&date=${yesterdayDate}&time_start=00.00&time_stop=23.59&channel=europa&__ajax__=1&list_only=1`
 
 axios.get(getUrl()).then(data => {
   const $ = cheerio.load(data.data)
@@ -29,21 +32,25 @@ axios.get(getUrl()).then(data => {
         .replace('&', 'and')
 
     return ({
-      artist: findText('.jp-title .title'),
-      song: findText('.jp-title span')
+      radio: 'Europa Plus',
+      date: yesterdayDate,
+      track: {
+        artist: findText('.jp-title .title'),
+        song: findText('.jp-title span')
+      }
     })
   }, containers).get()
 
   const countedTracks = [...tracks.reduce((mp, o) => {
-    if (!mp.has(o.song)) mp.set(o.song, Object.assign({ count: 0 }, o))
-    mp.get(o.song).count++
+    if (!mp.has(o.track.song)) mp.set(o.track.song, Object.assign({ count: 0 }, o))
+    mp.get(o.track.song).count++
     return mp
   }, new Map()).values()]
 
   const byCount = R.descend(R.prop('count'))
   const sortedTracks = R.sort(byCount, countedTracks)
 
-  // axios.post('http://localhost:8000/post', JSON.stringify(sortedTracks))
-  fs.unlinkSync('europa.csv')
-  R.map((elem) => fs.appendFileSync('europa.csv', `${elem.count}, ${elem.song}, ${elem.artist}\n`), sortedTracks)
+  axios.post('http://localhost:8000/post', sortedTracks)
+  // fs.unlinkSync('europa.csv')
+  // R.map((elem) => fs.appendFileSync('europa.csv', `${elem.count}, ${elem.song}, ${elem.artist}\n`), sortedTracks)
 })
