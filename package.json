@@ -16,7 +16,6 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "mongodb": "^2.2.33",
-    "osmosis": "^1.1.4",
     "telegraf": "^3.17.0"
   },
   "devDependencies": {
@@ -28,7 +27,7 @@
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
-    "nodemon": "^1.12.1",
+    "nodemon": "^1.12.5",
     "ramda": "^0.25.0"
   }
 }

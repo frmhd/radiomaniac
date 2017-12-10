@@ -1,4 +1,4 @@
-const db = require('../config/db')
+const tokens = require('../config/tokens')
 const express = require('express')
 const MongoClient = require('mongodb').MongoClient
 const bodyParser = require('body-parser')
@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(bodyParser.json())
 
-MongoClient.connect(db.url, (err, database) => {
+MongoClient.connect(tokens.url, (err, database) => {
   if (err) return console.log(err)
   require('../server/routes')(app, database)
   app.listen(port, () => {

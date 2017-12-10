@@ -1,8 +1,8 @@
-// const TOKEN = require('../config/db')
+const tokens = require('../config/tokens')
 const Telegraf = require('telegraf')
 const axios = require('axios')
 
-const bot = new Telegraf('479690556:AAFPuyGB8KP2oSJCGDom6hCEuH5H9dIjXjQ')
+const bot = new Telegraf(tokens.TOKEN)
 bot.start((ctx) => {
   console.log('started:', ctx.from.id)
   return ctx.reply('написать тут че он может')
