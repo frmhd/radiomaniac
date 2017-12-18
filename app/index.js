@@ -49,8 +49,9 @@ axios.get(getUrl()).then(data => {
 
   const byCount = R.descend(R.prop('count'))
   const sortedTracks = R.sort(byCount, countedTracks)
+  console.log(countedTracks)
 
-  axios.post('http://localhost:8000/post', sortedTracks)
+  axios.post('http://localhost:8000/post', sortedTracks).then(console.log('posted'))
   // fs.unlinkSync('europa.csv')
   // R.map((elem) => fs.appendFileSync('europa.csv', `${elem.count}, ${elem.song}, ${elem.artist}\n`), sortedTracks)
 })
