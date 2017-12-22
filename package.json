@@ -5,9 +5,9 @@
   "main": "app/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app/index.js",
-    "server:dev": "nodemon server/index.js",
-    "server:bot": "nodemon bot/index.js"
+    "start": "node --experimental-modules app/index.mjs",
+    "server:dev": "nodemon --experimental-modules server/index.mjs",
+    "server:bot": "nodemon --experimental-modules bot/index.mjs"
   },
   "author": "",
   "license": "ISC",

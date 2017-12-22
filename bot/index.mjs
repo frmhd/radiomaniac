@@ -1,6 +1,6 @@
-const tokens = require('../config/tokens')
-const Telegraf = require('telegraf')
-const axios = require('axios')
+import tokens from '../config/tokens'
+import Telegraf from 'telegraf'
+import axios from 'axios'
 
 const bot = new Telegraf(tokens.TOKEN)
 bot.start((ctx) => {

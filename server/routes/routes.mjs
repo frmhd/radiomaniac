@@ -1,7 +1,7 @@
-const R = require('ramda')
-const yesterday = require('../../app/index')
+import R from 'ramda'
+import yesterday from '../../app/index'
 
-module.exports = (app, db) => {
+export default (app, db) => {
   app.post('/post', (req, res) => {
     let docs = req.body
     docs.map((item, i) => {

@@ -1,9 +1,9 @@
-const tokens = require('../config/tokens')
-const express = require('express')
-const MongoClient = require('mongodb').MongoClient
-const bodyParser = require('body-parser')
-const app = express()
+import tokens from '../config/tokens'
+import express from 'express'
+import {MongoClient} from 'mongodb'
+import bodyParser from 'body-parser'
 
+const app = express()
 const port = 8000
 
 app.use(bodyParser.urlencoded({

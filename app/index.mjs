@@ -1,7 +1,7 @@
-const cheerio = require('cheerio')
-const axios = require('axios')
-const R = require('ramda')
-const fs = require('fs')
+import cheerio from 'cheerio'
+import axios from 'axios'
+import R from 'ramda'
+import fs from 'fs'
 
 const formatYesterday = () => {
   const today = new Date()
@@ -16,7 +16,6 @@ const formatYesterday = () => {
 }
 
 const yesterdayDate = formatYesterday()
-module.exports = formatYesterday
 
 const getUrl = () => `http://www.europaplus.ru/index.php?go=Playlist&date=${yesterdayDate}&time_start=00.00&time_stop=23.59&channel=europa&__ajax__=1&list_only=1`
 
