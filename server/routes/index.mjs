@@ -1,6 +1,7 @@
 import mainRoutes from './routes'
 
-export default (app, db) => {
+export const routes = (app, db) => {
   mainRoutes(app, db)
-  // Тут, позже, будут и другие обработчики маршрутов
 }
+
+export default routes

@@ -1,29 +1,50 @@
 import R from 'ramda'
-import yesterday from '../../app/index'
 
-export default (app, db) => {
+const mainRoutes = (app, db) => {
   app.post('/post', (req, res) => {
-    let docs = req.body
+    const docs = req.body
     docs.map((item, i) => {
       db.collection('test').findOneAndUpdate(
-        { 'track.song': item.track.song },
+        { 'track.song': item.track.song, 'track.artist': item.track.artist },
         {
-          $set: { new: false }
+          $set: { [`countInfo.${item.date}`]: item.count },
+          $inc: { 'countInfo.weekCount': item.count }
         },
         null,
         (err, res) => {
           if (R.isNil(res.value)) {
-            db.collection('test').insertOne({...item, new: true})
+            console.log('insert')
+            db.collection('test').insertOne({
+              radio: item.radio,
+              countInfo: {
+                [item.date]: item.count,
+                weekCount: item.count
+              },
+              track: {
+                artist: item.track.artist,
+                song: item.track.song
+              }
+            })
+          } else {
+            console.log('updated')
           }
-          if (err) console.log(err)
+          if (err) {
+            console.log(err)
+          }
         }
       )
     })
+    res.send('ok')
+  })
+  app.post('/delete', (req, res) => {
+    db.collection('test').remove()
+    res.send('deleted')
   })
   app.get('/get', (req, res) => {
-    db.collection('test').find({date: yesterday()}).toArray(function (err, docs) {
-      console.log(err)
-      console.log(docs)
-    })
+    let dataArr = []
+    const cursor = db.collection('test').find({})
+    cursor.forEach((item) => dataArr.push(item), () => res.send(dataArr))
   })
 }
+
+export default mainRoutes
