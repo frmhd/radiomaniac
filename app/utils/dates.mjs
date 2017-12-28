@@ -1,4 +1,4 @@
-const formattedDate = (days) => {
+const formattedDate = days => {
   const today = new Date()
   const yesterday = new Date(today).setDate(today.getDate() - days)
 

@@ -10,7 +10,7 @@ const mainRoutes = (app, db) => {
   })
   app.get('/get', (req, res) => {
     let dataArr = []
-    const cursor = db.collection('test').find({})
+    const cursor = db.collection('test').find({}).sort({ week: -1 })
     cursor.forEach((item) => dataArr.push(item), () => res.send(dataArr))
   })
 }
