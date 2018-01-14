@@ -1,7 +1,7 @@
 import { tokens } from '../config/tokens'
 import Telegraf from 'telegraf'
 import axios from 'axios'
-// import fs from 'fs'
+import fs from 'fs'
 const bot = new Telegraf(tokens.bot)
 
 bot.start((ctx) => {
@@ -32,6 +32,13 @@ bot.hears('😎 Жира мне!', (ctx) => {
     }
 
     ctx.replyWithHTML(replyItemData(5).trim())
+  }
+  ).catch(err => console.log(err))
+})
+bot.hears('file', (ctx) => {
+  axios.get('http://localhost:8000/get').then((data) => {
+    const itemToWrite = (item) => `${item.track.song.replace('PI_', '').toLowerCase()}, ${item.track.artist.toLowerCase()}, ${item.week} \n`
+    data.data.map(item => fs.appendFile('message.csv', itemToWrite(item)))
   }
   ).catch(err => console.log(err))
 })

@@ -12,8 +12,10 @@ export const grab = async (configuration) => {
     const findText = selector =>
       $(elem).find(selector)
         .text()
+        .toLowerCase()
         .replace(/[.,']/g, '')
         .replace('&', 'and')
+        .replace('pi_', '')
 
     const track = { radio, date, track: { artist: findText(artistSelector), song: findText(songSelector) } }
     return track

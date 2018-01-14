@@ -1,7 +1,7 @@
 const mainRoutes = (app, db) => {
-  app.post('/post', (req, res) => {
+  app.post('/post/:collectionName', (req, res) => {
     const docs = req.body
-    db.collection('test').insertMany(docs)
+    db.collection(req.params.collectionName).insertMany(docs)
     res.send('ok')
   })
   app.post('/delete', (req, res) => {
