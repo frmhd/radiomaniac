@@ -1,5 +1,6 @@
 import { grab } from '../utils/grabbing'
 import { week } from '../utils/dates'
+import { host } from '../../config/env'
 import axios from 'axios'
 
 export const postData = (configuration) => {
@@ -46,7 +47,7 @@ export const postData = (configuration) => {
           return prev
         }, new Map()).values()
       ]
-      axios.post(`http://localhost:8000/post/${configuration.collection}`, countedWeekTracks)
+      axios.post(`${host}/post/${configuration.collection}`, countedWeekTracks)
     }
   }
 

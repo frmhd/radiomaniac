@@ -2,45 +2,25 @@ import { tokens } from '../config/tokens'
 import Telegraf from 'telegraf'
 import axios from 'axios'
 import fs from 'fs'
+import { host } from '../config/env'
 const bot = new Telegraf(tokens.bot)
 
-bot.start((ctx) => {
-  console.log('started:', ctx.from.id)
-  return ctx.reply('Нажми на кнопку блять!', Telegraf.Markup
-    .keyboard([
-      ['😎 Жира мне!'], // Row1 with 2 buttons
-      ['😒 Димон', '😤 Заебал'], // Row2 with 2 buttons
-      ['👉🏽 Иди', '🛌 Спать'] // Row3 with 3 buttons
-    ])
-    .resize()
-    .extra()
-  )
-})
-bot.hears('😎 Жира мне!', (ctx) => {
-  axios.get('http://localhost:8000/get').then((data) => {
-    const text = (number) => data.data.slice(0, number).map((item, index) =>
-      `<b>${index + 1}. ${item.track.song.toUpperCase()}</b>
-      (<i>${item.track.artist}</i>)
-      <b>${item.week} раз</b> \n \n`
-    ).toString()
-    const replyItemData = (number) => {
-      return `
-        <b>===== TOP-${number} за неделю =====</b>
+bot.hears('go', (ctx) => {
+  const radios = ['nashe', 'europa']
+  radios.map(radio => {
+    axios.get(`${host}/get/${radio}`).then((data) => {
+      const itemToWrite = (item) => {
+        const dateList = Object.keys(item.countInfo)
+        const printDate = dateList.map(date => `${date}\n`)
+        const printDateCount = dateList.map(date => `${item.countInfo[date]}\n`)
 
-        ${text(number).replace(/,/g, '')}
-      `
+        return `${item.track.song}, ${item.track.artist}, ${item.week}, "${printDate}", "${printDateCount}" \n`
+      }
+
+      data.data.map(item => fs.appendFile(`${radio}.csv`, itemToWrite(item)))
     }
-
-    ctx.replyWithHTML(replyItemData(5).trim())
-  }
-  ).catch(err => console.log(err))
-})
-bot.hears('file', (ctx) => {
-  axios.get('http://localhost:8000/get').then((data) => {
-    const itemToWrite = (item) => `${item.track.song.replace('PI_', '').toLowerCase()}, ${item.track.artist.toLowerCase()}, ${item.week} \n`
-    data.data.map(item => fs.appendFile('message.csv', itemToWrite(item)))
-  }
-  ).catch(err => console.log(err))
+    ).catch(err => console.log(err))
+  })
 })
 
 bot.startPolling()

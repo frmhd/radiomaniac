@@ -8,9 +8,9 @@ const mainRoutes = (app, db) => {
     db.collection('test').remove()
     res.send('deleted')
   })
-  app.get('/get', (req, res) => {
+  app.get('/get/:radio', (req, res) => {
     let dataArr = []
-    const cursor = db.collection('test').find({}).sort({ week: -1 })
+    const cursor = db.collection(req.params.radio).find({}).sort({ week: -1 })
     cursor.forEach((item) => dataArr.push(item), () => res.send(dataArr))
   })
 }
