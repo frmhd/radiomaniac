@@ -10,4 +10,6 @@ const configuration = {
   url: nasheRoute
 }
 
-postData(configuration)
+const postAction = () => postData(configuration)
+
+export default postAction

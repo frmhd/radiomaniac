@@ -4,8 +4,8 @@ const mainRoutes = (app, db) => {
     db.collection(req.params.collectionName).insertMany(docs)
     res.send('ok')
   })
-  app.post('/delete', (req, res) => {
-    db.collection('test').remove()
+  app.post('/delete/:radio', (req, res) => {
+    db.collection(req.params.radio).remove()
     res.send('deleted')
   })
   app.get('/get/:radio', (req, res) => {

@@ -3,7 +3,7 @@ import { week } from '../utils/dates'
 import { host } from '../../config/env'
 import axios from 'axios'
 
-export const postData = (configuration) => {
+export const postData = async (configuration) => {
   // TODO: refactor this!
   let newArr = []
   const postTracks = async (arr, i) => {
@@ -26,7 +26,7 @@ export const postData = (configuration) => {
       ]
 
       newArr = newArr.concat(countedDayTracks)
-      postTracks(arr, ++count)
+      await postTracks(arr, ++count)
     } else {
       const countedWeekTracks = [
         ...newArr.reduce((prev, currentItem) => {
@@ -51,5 +51,5 @@ export const postData = (configuration) => {
     }
   }
 
-  postTracks(week(), 0)
+  await postTracks(week(), 0)
 }

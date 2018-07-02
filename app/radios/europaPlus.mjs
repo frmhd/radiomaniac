@@ -10,4 +10,6 @@ const configuration = {
   url: europaRoute
 }
 
-postData(configuration)
+const postAction = () => postData(configuration)
+
+export default postAction
