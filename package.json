@@ -5,9 +5,7 @@
   "main": "app/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --experimental-modules app/index.mjs",
-    "server:dev": "nodemon --experimental-modules server/index.mjs",
-    "server:bot": "nodemon --experimental-modules bot/index.mjs"
+    "start": "nodemon --experimental-modules server/index.mjs"
   },
   "author": "",
   "license": "ISC",

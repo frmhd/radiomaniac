@@ -6,7 +6,7 @@ import fs from 'fs'
 import path from 'path'
 
 import axios from 'axios'
-import CronJob from 'cron/lib/cron'
+import Cron from 'cron/lib/cron'
 import TelegramBot from 'node-telegram-bot-api'
 
 import { host } from '../config/env'
@@ -35,7 +35,7 @@ MongoClient.connect(tokens.db, (err, database) => {
 
     const bot = new TelegramBot(tokens.bot, { polling: true })
 
-    const sendDataToChat = () => new CronJob.CronJob('00 00 10 * * 1', async () => {
+    const sendDataToChat = () => new Cron.CronJob('00 00 10 * * 1', async () => {
       await europaPlusPost()
       console.log('EUROPE data added to Mongo')
       await nasheRadioPost()
