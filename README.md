@@ -20,7 +20,3 @@ mongodb login/password and telegram token put in `config/tokens.mjs` like:
 `npm i` - install all packages
 
 `npm start` - start application
-
-`npm run server:dev` - start server
-
-`npm run server:bot` - start bot
