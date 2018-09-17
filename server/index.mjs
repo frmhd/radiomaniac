@@ -38,7 +38,7 @@ MongoClient.connect(mongoToken, (err, database) => {
 
     const bot = new TelegramBot(telegramToken, { polling: true })
 
-    const sendDataToChat = () => new Cron.CronJob('00 55 17 * * 1', async () => {
+    const sendDataToChat = () => new Cron.CronJob('00 03 22 * * 1', async () => {
       await europaPlusPost()
       console.log('EUROPE data added to Mongo')
       await nasheRadioPost()
