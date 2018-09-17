@@ -27,15 +27,18 @@ app.use(bodyParser.json({
   limit: '50mb'
 }))
 
-MongoClient.connect(tokens.db, (err, database) => {
+const telegramToken = process.env.TELEGRAM_TOKEN || tokens.bot
+const mongoToken = process.env.MONGO_TOKEN || tokens.db
+
+MongoClient.connect(mongoToken, (err, database) => {
   if (err) return console.log(err)
   routes(app, database)
   app.listen(port, () => {
     console.log('We are live on ' + port)
 
-    const bot = new TelegramBot(tokens.bot, { polling: true })
+    const bot = new TelegramBot(telegramToken, { polling: true })
 
-    const sendDataToChat = () => new Cron.CronJob('00 17 12 * * 1', async () => {
+    const sendDataToChat = () => new Cron.CronJob('00 40 00 * * 2', async () => {
       await europaPlusPost()
       console.log('EUROPE data added to Mongo')
       await nasheRadioPost()
