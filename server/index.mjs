@@ -10,7 +10,7 @@ import Cron from 'cron/lib/cron'
 import TelegramBot from 'node-telegram-bot-api'
 
 import { host } from '../config/env'
-import { tokens } from '../config/tokens'
+// import { tokens } from '../config/tokens'
 import routes from './routes/index'
 
 import europaPlusPost from '../app/radios/europaPlus'
@@ -27,8 +27,8 @@ app.use(bodyParser.json({
   limit: '50mb'
 }))
 
-const telegramToken = process.env.TELEGRAM_TOKEN || tokens.bot
-const mongoToken = process.env.MONGO_TOKEN || tokens.db
+const telegramToken = process.env.TELEGRAM_TOKEN
+const mongoToken = process.env.MONGO_TOKEN
 
 MongoClient.connect(mongoToken, (err, database) => {
   if (err) return console.log(err)
@@ -38,7 +38,7 @@ MongoClient.connect(mongoToken, (err, database) => {
 
     const bot = new TelegramBot(telegramToken, { polling: true })
 
-    const sendDataToChat = () => new Cron.CronJob('00 18 01 * * 2', async () => {
+    const sendDataToChat = () => new Cron.CronJob('00 25 01 * * 2', async () => {
       await europaPlusPost()
       console.log('EUROPE data added to Mongo')
       await nasheRadioPost()
