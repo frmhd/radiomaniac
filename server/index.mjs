@@ -38,13 +38,15 @@ MongoClient.connect(mongoToken, (err, database) => {
 
     const bot = new TelegramBot(telegramToken, { polling: true })
 
-    const sendDataToChat = () => new Cron.CronJob('00 25 01 * * 2', async () => {
+    const sendDataToChat = () => new Cron.CronJob('00 56 11 * * 6', async () => {
       await europaPlusPost()
       console.log('EUROPE data added to Mongo')
       await nasheRadioPost()
       console.log('NASHE data added to Mongo')
 
       const radios = ['nashe', 'europa']
+
+      await bot.sendMessage('-1001172819891', 'Статистика за прошлую неделю')
 
       radios.map(radio => {
         axios.get(`${host}/get/${radio}`).then(({ data }) => {
@@ -62,7 +64,7 @@ MongoClient.connect(mongoToken, (err, database) => {
           fs.writeFileSync(filePath, fileData)
           console.log(`+++++ ${radio}.csv writed +++++`)
 
-          bot.sendDocument('-1001331586104', fs.createReadStream(filePath))
+          bot.sendDocument('-1001172819891', fs.createReadStream(filePath))
             .then(() => {
               fs.unlinkSync(filePath)
               console.log(`----- ${radio}.csv deleted -----`)
