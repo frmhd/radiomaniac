@@ -8,7 +8,7 @@
 
 `npm i` - install all packages
 
-Than start application with two ENV variables:
+Then start application with two ENV variables:
 
   1. `TELEGRAM_TOKEN` - your telegram bot token
   2. `TELEGRAM_CHAT_ID` - chat id which will recieve messages from app
