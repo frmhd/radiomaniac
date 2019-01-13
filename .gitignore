@@ -58,4 +58,5 @@ typings/
 .env
 
 config/tokens.mjs
+config/env.mjs
 .DS_Store
