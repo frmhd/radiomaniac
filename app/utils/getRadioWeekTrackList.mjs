@@ -1,3 +1,9 @@
+/**
+ * function for gets array with dates of fetching tracklists
+ *
+ * @param {number} [daysCount=7] - which days we want to fetch
+ * @returns {{date: string, value: number}[]}
+ */
 const getDates = (daysCount = 7) => {
   const dates = [];
 
