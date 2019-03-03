@@ -15,6 +15,12 @@ const SHANSON = 152;
 const LIKE_FM = 2160;
 const CAPITAL_FM = 2169;
 const RADIO_ROMANTIKA = 1024;
+const ISKATEL = 2373;
+const SUPER_DISCOTEKA = 1358;
+const GOP_FM = 1275;
+const PIONEER_FM = 987;
+const RECORD = 1722;
+const RUSSIAN_DANCE = 2173;
 
 export default [
   {
@@ -84,5 +90,29 @@ export default [
   {
     name: 'radioRomantika',
     id: RADIO_ROMANTIKA,
+  },
+  {
+    name: 'iskatel',
+    id: ISKATEL,
+  },
+  {
+    name: 'superDiscoteka',
+    id: SUPER_DISCOTEKA,
+  },
+  {
+    name: 'gopFm',
+    id: GOP_FM,
+  },
+  {
+    name: 'pioneerFm',
+    id: PIONEER_FM,
+  },
+  {
+    name: 'record',
+    id: RECORD,
+  },
+  {
+    name: 'russianDance',
+    id: RUSSIAN_DANCE,
   },
 ];
