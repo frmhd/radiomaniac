@@ -21,6 +21,8 @@ const GOP_FM = 1275;
 const PIONEER_FM = 987;
 const RECORD = 1722;
 const RUSSIAN_DANCE = 2173;
+const RELAX = 201;
+const EUROPA_PLUS_LIGHT = 2319;
 
 export default [
   {
@@ -114,5 +116,13 @@ export default [
   {
     name: 'russianDance',
     id: RUSSIAN_DANCE,
+  },
+  {
+    name: 'relax',
+    id: RELAX,
+  },
+  {
+    name: 'europaPlusLight',
+    id: EUROPA_PLUS_LIGHT,
   },
 ];
